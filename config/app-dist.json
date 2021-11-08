@@ -10,5 +10,6 @@
       "users": "users"
     }
   },
-  "encryption_key": "c286ff708a66d36d85bad3b4f00ae35b92a6f950671cf45375e8a9b007a11967"
+  "encryption_key": "c286ff708a66d36d85bad3b4f00ae35b92a6f950671cf45375e8a9b007a11967",
+  "jwt_key": "Sw@rd2021"
 }

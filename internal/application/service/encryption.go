@@ -11,16 +11,16 @@ import (
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 )
 
-type encryptionService struct{}
+type encryptionService struct {
+	keyString string
+}
 
-const keyString = "c286ff708a66d36d85bad3b4f00ae35b92a6f950671cf45375e8a9b007a11967" // env
-
-func NewEncryption() contract.EncryptionService {
-	return encryptionService{}
+func NewEncryptionService(keyString string) contract.EncryptionService {
+	return encryptionService{keyString}
 }
 
 func (e encryptionService) Encrypt(content string) string {
-	key, _ := hex.DecodeString(keyString)
+	key, _ := hex.DecodeString(e.keyString)
 	plaintext := []byte(content)
 
 	block, err := aes.NewCipher(key)
@@ -47,7 +47,7 @@ func (e encryptionService) Decrypt(contentEncrypted string) string {
 		return ""
 	}
 
-	key, _ := hex.DecodeString(keyString)
+	key, _ := hex.DecodeString(e.keyString)
 	enc, _ := hex.DecodeString(contentEncrypted)
 
 	block, err := aes.NewCipher(key)
