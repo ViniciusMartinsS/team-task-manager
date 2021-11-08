@@ -8,14 +8,14 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/ViniciusMartinsS/manager/internal/domain"
+	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 )
 
 type encryptionService struct{}
 
 const keyString = "c286ff708a66d36d85bad3b4f00ae35b92a6f950671cf45375e8a9b007a11967" // env
 
-func NewEncryption() domain.EncryptionService {
+func NewEncryption() contract.EncryptionService {
 	return encryptionService{}
 }
 

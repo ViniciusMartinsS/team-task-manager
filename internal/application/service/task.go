@@ -12,14 +12,14 @@ type taskService struct {
 	taskRepository      contract.TaskRepository
 	userRepository      contract.UserRepository
 	notificationService contract.NotificationService
-	encryption          domain.EncryptionService
+	encryption          contract.EncryptionService
 }
 
 func NewTaskService(
 	taskRepository contract.TaskRepository,
 	userRepository contract.UserRepository,
 	notificationService contract.NotificationService,
-	encryption domain.EncryptionService,
+	encryption contract.EncryptionService,
 ) contract.TaskService {
 	return taskService{taskRepository, userRepository, notificationService, encryption}
 }
