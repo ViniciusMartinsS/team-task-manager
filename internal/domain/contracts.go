@@ -20,11 +20,11 @@ type UserRepository interface {
 }
 
 type AuthController interface {
-	Login([]byte) (LoginResponse, int)
+	Login([]byte) LoginResponse
 }
 
 type AuthService interface {
-	Login(email, password string) (LoginResponse, int)
+	Login(email, password string) LoginResponse
 }
 
 type TaskController interface {

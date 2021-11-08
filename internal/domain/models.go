@@ -38,7 +38,7 @@ type LoginPayload struct {
 }
 
 type LoginResponse struct {
-	Status      bool   `json:"status"`
+	Code        int    `json:"status"`
 	AccessToken string `json:"accessToken,omitempty"`
 	Message     string `json:"message,omitempty"`
 }

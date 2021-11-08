@@ -1,8 +1,7 @@
 package service
 
 import (
-	"net/http"
-
+	constants "github.com/ViniciusMartinsS/manager/internal/common"
 	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain"
 	"golang.org/x/crypto/bcrypt"
@@ -18,25 +17,31 @@ func NewAuthService(userRepository domain.UserRepository) domain.AuthService {
 	return authService{userRepository}
 }
 
-func (a authService) Login(email, password string) (domain.LoginResponse, int) {
+func (a authService) Login(email, password string) domain.LoginResponse {
 	user, err := a.userRepository.FindByEmail(email)
 
 	if err != nil && errorNotAuthorized == err.Error() {
-		code := http.StatusUnauthorized
-		return domain.LoginResponse{Message: http.StatusText(code)}, code
+		return domain.LoginResponse{
+			Code:    constants.NOT_AUTHORIZED_ERROR_CODE,
+			Message: constants.NOT_AUTHORIZED_ERROR_MESSAGE,
+		}
 	}
 
 	if err != nil {
-		code := http.StatusInternalServerError
-		return domain.LoginResponse{Message: http.StatusText(code)}, code
+		return domain.LoginResponse{
+			Code:    constants.INTERNAL_SERVER_ERROR_CODE,
+			Message: constants.INTERNAL_SERVER_ERROR_MESSAGE,
+		}
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	if err != nil {
-		code := http.StatusInternalServerError
-		return domain.LoginResponse{Message: http.StatusText(code)}, code
+		return domain.LoginResponse{
+			Code:    constants.INTERNAL_SERVER_ERROR_CODE,
+			Message: constants.INTERNAL_SERVER_ERROR_MESSAGE,
+		}
 	}
 
 	accessToken := common.GenerateAccessToken(int(user.ID), email)
-	return domain.LoginResponse{Status: true, AccessToken: accessToken}, http.StatusOK
+	return domain.LoginResponse{Code: 0, AccessToken: accessToken}
 }

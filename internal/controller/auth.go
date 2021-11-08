@@ -2,8 +2,8 @@ package controller
 
 import (
 	"encoding/json"
-	"net/http"
 
+	constants "github.com/ViniciusMartinsS/manager/internal/common"
 	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain"
 )
@@ -16,23 +16,23 @@ func NewAuthController(authService domain.AuthService) domain.AuthController {
 	return authController{authService}
 }
 
-func (a authController) Login(body []byte) (domain.LoginResponse, int) {
+func (a authController) Login(body []byte) domain.LoginResponse {
 	var payload domain.LoginPayload
 
 	err := common.ValidateLoginSchema(body)
 	if err != nil {
-		code := http.StatusBadRequest
-		result := domain.LoginResponse{Message: http.StatusText(code)}
-
-		return result, code
+		return domain.LoginResponse{
+			Code:    constants.BAD_REQUEST_ERROR_CODE,
+			Message: err.Error(),
+		}
 	}
 
 	err = json.Unmarshal(body, &payload)
 	if err != nil {
-		code := http.StatusInternalServerError
-		result := domain.LoginResponse{Message: http.StatusText(code)}
-
-		return result, code
+		return domain.LoginResponse{
+			Code:    constants.INTERNAL_SERVER_ERROR_CODE,
+			Message: constants.INTERNAL_SERVER_ERROR_MESSAGE,
+		}
 	}
 
 	return a.authService.Login(payload.Email, payload.Password)

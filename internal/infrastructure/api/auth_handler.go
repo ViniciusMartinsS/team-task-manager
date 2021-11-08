@@ -10,7 +10,7 @@ import (
 	"github.com/golobby/container/v3"
 )
 
-type AUTH_HANDLER func([]byte) (domain.LoginResponse, int)
+type AUTH_HANDLER func([]byte) domain.LoginResponse
 
 func handleAuthRequest(w http.ResponseWriter, r *http.Request) {
 	var authController domain.AuthController
@@ -23,12 +23,13 @@ func handleAuthRequest(w http.ResponseWriter, r *http.Request) {
 	requestHandler := map[string]AUTH_HANDLER{
 		"POST": authController.Login,
 	}[r.Method]
-
 	body, _ := ioutil.ReadAll(r.Body)
-	response, code := requestHandler(body)
+
+	response := requestHandler(body)
+	httpStatusCode := HTTP_CODE[response.Code]
 
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(code)
+	w.WriteHeader(httpStatusCode)
 
 	json.NewEncoder(w).Encode(response)
 }
