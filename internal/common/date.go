@@ -2,14 +2,12 @@ package common
 
 import "time"
 
-var format = "02/01/2006"
-
 func StrToDate(value string) *time.Time {
 	if value == "" {
 		return nil
 	}
 
-	date, err := time.Parse(format, value)
+	date, err := time.Parse(DATE_FORMAT, value)
 	if err != nil {
 		panic(err)
 	}
@@ -22,5 +20,5 @@ func DateToStr(value *time.Time) string {
 		return ""
 	}
 
-	return value.Format(format)
+	return value.Format(DATE_FORMAT)
 }

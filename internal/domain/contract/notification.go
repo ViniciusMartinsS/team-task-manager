@@ -1,7 +1,7 @@
 package contract
 
-import "github.com/ViniciusMartinsS/manager/internal/domain"
+import "github.com/ViniciusMartinsS/manager/internal/domain/model"
 
 type NotificationService interface {
-	Notify(task domain.Task)
+	Notify(task model.Task)
 }

@@ -5,18 +5,18 @@ import (
 	"fmt"
 	"regexp"
 
-	constants "github.com/ViniciusMartinsS/manager/internal/common"
-	"github.com/ViniciusMartinsS/manager/internal/domain"
+	constant "github.com/ViniciusMartinsS/manager/internal/common"
+	"github.com/ViniciusMartinsS/manager/internal/domain/model"
 	"github.com/go-playground/validator/v10"
 )
 
-type TaskCreate struct {
+type TaskCreateDTO struct {
 	Name      string  `validate:"required"`
 	Summary   string  `validate:"required,max=2500"`
 	Performed *string `json:",omitempty"`
 }
 
-type TaskUpdate struct {
+type TaskUpdateDTO struct {
 	Name      string  `json:",omitempty"`
 	Summary   string  `json:",omitempty" validate:"max=2500"`
 	Performed *string `json:",omitempty"`
@@ -25,7 +25,7 @@ type TaskUpdate struct {
 var validate *validator.Validate
 
 func ValidateLoginSchema(body []byte) error {
-	var login domain.LoginPayload
+	var login model.LoginPayload
 	_ = json.Unmarshal(body, &login)
 
 	validate = validator.New()
@@ -39,7 +39,7 @@ func ValidateLoginSchema(body []byte) error {
 }
 
 func ValidateTaskCreateSchema(body []byte) error {
-	var task TaskCreate
+	var task TaskCreateDTO
 	err := json.Unmarshal(body, &task)
 	if err != nil {
 		return err
@@ -61,7 +61,7 @@ func ValidateTaskCreateSchema(body []byte) error {
 }
 
 func ValidateTaskUpdateSchema(body []byte) error {
-	var task TaskUpdate
+	var task TaskUpdateDTO
 	err := json.Unmarshal(body, &task)
 	if err != nil {
 		return err
@@ -87,11 +87,11 @@ func ValidateDateFormat(performed *string) error {
 		return nil
 	}
 
-	matched, _ := regexp.MatchString(constants.DATE_REGEX, *performed)
+	matched, _ := regexp.MatchString(constant.DATE_REGEX, *performed)
 	if matched {
 		return nil
 	}
 
-	err := fmt.Errorf(constants.DATE_BAD_REQUEST)
+	err := fmt.Errorf(constant.DATE_BAD_REQUEST)
 	return err
 }

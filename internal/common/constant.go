@@ -13,7 +13,7 @@ const (
 	NOT_AUTHORIZED_ERROR_MESSAGE  = "Stop right there! You are unauthorized!"
 	DATE_BAD_REQUEST              = "key: 'TaskCreate.Summary' Error:Field validation for 'Performed' failed on the 'format' regex"
 
-	DATE_REGEX = `^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$`
-
+	DATE_REGEX              = `^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$`
+	DATE_FORMAT             = "02/01/2006"
 	DB_ERROR_NOT_AUTHORIZED = "record not found"
 )

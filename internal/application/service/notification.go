@@ -5,8 +5,8 @@ import (
 	"log"
 
 	"github.com/ViniciusMartinsS/manager/internal/common"
-	"github.com/ViniciusMartinsS/manager/internal/domain"
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
+	"github.com/ViniciusMartinsS/manager/internal/domain/model"
 )
 
 type notificationService struct {
@@ -17,7 +17,7 @@ func NewNotificationService(userRepository contract.UserRepository) contract.Not
 	return notificationService{userRepository}
 }
 
-func (n notificationService) Notify(task domain.Task) {
+func (n notificationService) Notify(task model.Task) {
 	row, err := n.userRepository.FindBydId(task.UserId)
 	if err != nil {
 		log.Println("[ERROR] Gathering user to notify")

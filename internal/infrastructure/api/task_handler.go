@@ -7,13 +7,13 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/ViniciusMartinsS/manager/internal/domain"
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
+	"github.com/ViniciusMartinsS/manager/internal/domain/model"
 	"github.com/golobby/container/v3"
 	"github.com/gorilla/mux"
 )
 
-type TASK_HANDLER func(domain.HandleTaskRequest) domain.TaskResponse
+type TASK_HANDLER func(model.HandleTaskRequest) model.TaskResponse
 
 func handleTaskRequest(w http.ResponseWriter, r *http.Request) {
 	var taskController contract.TaskController
@@ -34,7 +34,7 @@ func handleTaskRequest(w http.ResponseWriter, r *http.Request) {
 	userId := getUserId(r.Header)
 	taskId := mux.Vars(r)["id"]
 
-	params := domain.HandleTaskRequest{Body: body, UserId: userId, TaskId: taskId}
+	params := model.HandleTaskRequest{Body: body, UserId: userId, TaskId: taskId}
 
 	response := requestHandler(params)
 	httpStatusCode := HTTP_CODE[response.Code]

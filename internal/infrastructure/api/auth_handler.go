@@ -6,12 +6,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ViniciusMartinsS/manager/internal/domain"
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
+	"github.com/ViniciusMartinsS/manager/internal/domain/model"
 	"github.com/golobby/container/v3"
 )
 
-type AUTH_HANDLER func([]byte) domain.LoginResponse
+type AUTH_HANDLER func([]byte) model.LoginResponse
 
 func handleAuthRequest(w http.ResponseWriter, r *http.Request) {
 	var authController contract.AuthController

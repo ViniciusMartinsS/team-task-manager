@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ViniciusMartinsS/manager/internal/domain"
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
+	"github.com/ViniciusMartinsS/manager/internal/domain/model"
 	"github.com/ViniciusMartinsS/manager/internal/infrastructure"
 	"gorm.io/gorm"
 )
@@ -49,21 +49,21 @@ func (c connection) CreateTables() error {
 	if err = c.db.Migrator().DropTable(roleTable); err != nil {
 		log.Fatalf("cannot drop table: %v", err)
 	}
-	if err = c.db.Migrator().CreateTable(&domain.Role{}); err != nil {
+	if err = c.db.Migrator().CreateTable(&model.Role{}); err != nil {
 		return c.db.Error
 	}
 
 	if err = c.db.Migrator().DropTable(taskTable); err != nil {
 		log.Fatalf("cannot drop table: %v", err)
 	}
-	if err = c.db.Migrator().CreateTable(&domain.Task{}); err != nil {
+	if err = c.db.Migrator().CreateTable(&model.Task{}); err != nil {
 		return c.db.Error
 	}
 
 	if err = c.db.Migrator().DropTable(userTable); err != nil {
 		log.Fatalf("cannot drop table: %v", err)
 	}
-	if err = c.db.Migrator().CreateTable(&domain.User{}); err != nil {
+	if err = c.db.Migrator().CreateTable(&model.User{}); err != nil {
 		return c.db.Error
 	}
 
@@ -74,14 +74,14 @@ func (c connection) CreateTables() error {
 
 func (c connection) SeedTables() {
 	for _, role := range roles {
-		c.db.Model(&domain.Role{}).Create(&role)
+		c.db.Model(&model.Role{}).Create(&role)
 	}
 
 	for _, task := range tasks {
-		c.db.Model(&domain.Task{}).Create(&task)
+		c.db.Model(&model.Task{}).Create(&task)
 	}
 
 	for _, user := range users {
-		c.db.Model(&domain.User{}).Create(&user)
+		c.db.Model(&model.User{}).Create(&user)
 	}
 }

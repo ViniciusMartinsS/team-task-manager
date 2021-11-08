@@ -3,8 +3,8 @@ package repository
 import (
 	"log"
 
-	"github.com/ViniciusMartinsS/manager/internal/domain"
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
+	"github.com/ViniciusMartinsS/manager/internal/domain/model"
 	"gorm.io/gorm"
 )
 
@@ -16,35 +16,35 @@ func NewTaskRepository(conn *gorm.DB) contract.TaskRepository {
 	return taskRepository{conn}
 }
 
-func (t taskRepository) FindAll() ([]domain.Task, error) {
-	var task []domain.Task
+func (t taskRepository) FindAll() ([]model.Task, error) {
+	var task []model.Task
 
 	result := t.conn.
 		Find(&task)
 
 	if result.Error != nil {
 		log.Println("[ERROR] Executing FindAll on Task repository: ", result.Error)
-		return make([]domain.Task, 0), result.Error
+		return make([]model.Task, 0), result.Error
 	}
 
 	return task, nil
 }
 
-func (t taskRepository) FindById(id int) (domain.Task, error) {
-	var task domain.Task
+func (t taskRepository) FindById(id int) (model.Task, error) {
+	var task model.Task
 
 	result := t.conn.Find(&task, id)
 
 	if result.Error != nil {
 		log.Println("[ERROR] Executing FindByUserId on Task repository: ", result.Error)
-		return domain.Task{}, result.Error
+		return model.Task{}, result.Error
 	}
 
 	return task, nil
 }
 
-func (t taskRepository) FindByUserId(id int) ([]domain.Task, error) {
-	var task []domain.Task
+func (t taskRepository) FindByUserId(id int) ([]model.Task, error) {
+	var task []model.Task
 
 	result := t.conn.
 		Where("user_id = ?", id).
@@ -52,33 +52,33 @@ func (t taskRepository) FindByUserId(id int) ([]domain.Task, error) {
 
 	if result.Error != nil {
 		log.Println("[ERROR] Executing FindByUserId on Task repository: ", result.Error)
-		return make([]domain.Task, 0), result.Error
+		return make([]model.Task, 0), result.Error
 	}
 
 	return task, nil
 }
 
-func (t taskRepository) Create(task domain.Task) (domain.Task, error) {
+func (t taskRepository) Create(task model.Task) (model.Task, error) {
 	result := t.conn.
 		Create(&task)
 
 	if result.Error != nil {
 		log.Println("[ERROR] Executing Create on Task repository: ", result.Error)
-		return domain.Task{}, result.Error
+		return model.Task{}, result.Error
 	}
 
 	return task, nil
 }
 
-func (t taskRepository) Update(id int, userId int, task domain.Task) (domain.Task, error) {
+func (t taskRepository) Update(id int, userId int, task model.Task) (model.Task, error) {
 	result := t.conn.
-		Model(&domain.Task{}).
+		Model(&model.Task{}).
 		Where("id = ? AND user_id = ?", id, userId).
 		Updates(task)
 
 	if result.Error != nil {
 		log.Println("[ERROR] Executing Update on Task repository: ", result.Error)
-		return domain.Task{}, result.Error
+		return model.Task{}, result.Error
 	}
 
 	return task, nil
@@ -86,7 +86,7 @@ func (t taskRepository) Update(id int, userId int, task domain.Task) (domain.Tas
 
 func (t taskRepository) Delete(id int) (bool, error) {
 	result := t.conn.
-		Delete(&domain.Task{}, id)
+		Delete(&model.Task{}, id)
 
 	if result.Error != nil {
 		log.Println("[ERROR] Executing Delete on Task repository: ", result.Error)

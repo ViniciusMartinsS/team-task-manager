@@ -1,8 +1,8 @@
 package contract
 
-import "github.com/ViniciusMartinsS/manager/internal/domain"
+import "github.com/ViniciusMartinsS/manager/internal/domain/model"
 
 type UserRepository interface {
-	FindBydId(id int) (domain.User, error)
-	FindByEmail(email string) (domain.User, error)
+	FindBydId(id int) (model.User, error)
+	FindByEmail(email string) (model.User, error)
 }

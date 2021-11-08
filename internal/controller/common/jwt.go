@@ -3,7 +3,7 @@ package common
 import (
 	"time"
 
-	"github.com/ViniciusMartinsS/manager/internal/domain"
+	"github.com/ViniciusMartinsS/manager/internal/domain/model"
 	"github.com/golang-jwt/jwt"
 )
 
@@ -13,8 +13,8 @@ var key = func(token *jwt.Token) (interface{}, error) {
 	return jwtKey, nil
 }
 
-func IsAccessTokenValid(accessToken string) (bool, *domain.Claims) {
-	claims := &domain.Claims{}
+func IsAccessTokenValid(accessToken string) (bool, *model.Claims) {
+	claims := &model.Claims{}
 	token, _ := jwt.ParseWithClaims(accessToken, claims, key)
 	return token.Valid, claims
 }
@@ -22,7 +22,7 @@ func IsAccessTokenValid(accessToken string) (bool, *domain.Claims) {
 func GenerateAccessToken(id int, email string) string {
 	expirationTime := time.Now().Add(150 * time.Minute)
 
-	claims := &domain.Claims{
+	claims := &model.Claims{
 		Email:  email,
 		UserId: id,
 		StandardClaims: jwt.StandardClaims{
