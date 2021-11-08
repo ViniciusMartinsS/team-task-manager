@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/ViniciusMartinsS/manager/internal/domain"
+	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"github.com/ViniciusMartinsS/manager/internal/infrastructure"
 	"gorm.io/gorm"
 )
@@ -20,7 +21,7 @@ var (
 	userTable = infrastructure.GetConfig("database.table.users")
 )
 
-func NewDatabaseConfigurator(db *gorm.DB) domain.Database {
+func NewDatabaseConfigurator(db *gorm.DB) contract.Database {
 	return &connection{db}
 }
 

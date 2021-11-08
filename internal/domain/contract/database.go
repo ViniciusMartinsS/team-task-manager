@@ -1,4 +1,4 @@
-package domain
+package contract
 
 type Database interface {
 	CreateDatabase() error
