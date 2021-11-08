@@ -6,13 +6,14 @@ import (
 	constants "github.com/ViniciusMartinsS/manager/internal/common"
 	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain"
+	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 )
 
 type authController struct {
-	authService domain.AuthService
+	authService contract.AuthService
 }
 
-func NewAuthController(authService domain.AuthService) domain.AuthController {
+func NewAuthController(authService contract.AuthService) contract.AuthController {
 	return authController{authService}
 }
 

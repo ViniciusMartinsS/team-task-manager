@@ -3,7 +3,6 @@ package internal
 import (
 	"github.com/ViniciusMartinsS/manager/internal/application/service"
 	"github.com/ViniciusMartinsS/manager/internal/controller"
-	"github.com/ViniciusMartinsS/manager/internal/domain"
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"github.com/ViniciusMartinsS/manager/internal/infrastructure/database"
 	"github.com/ViniciusMartinsS/manager/internal/infrastructure/database/repository"
@@ -13,7 +12,7 @@ import (
 func InitializeDIContainers() {
 	conn := database.Connection()
 
-	container.Singleton(func() domain.UserRepository {
+	container.Singleton(func() contract.UserRepository {
 		return repository.NewUserRepository(conn)
 	})
 	container.Singleton(func() contract.TaskRepository {

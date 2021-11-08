@@ -6,19 +6,6 @@ type Database interface {
 	SeedTables()
 }
 
-type UserRepository interface {
-	FindBydId(id int) (User, error)
-	FindByEmail(email string) (User, error)
-}
-
-type AuthController interface {
-	Login([]byte) LoginResponse
-}
-
-type AuthService interface {
-	Login(email, password string) LoginResponse
-}
-
 type NotificationService interface {
 	Notify(task Task)
 }

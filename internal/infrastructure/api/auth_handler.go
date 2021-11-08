@@ -7,13 +7,14 @@ import (
 	"net/http"
 
 	"github.com/ViniciusMartinsS/manager/internal/domain"
+	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"github.com/golobby/container/v3"
 )
 
 type AUTH_HANDLER func([]byte) domain.LoginResponse
 
 func handleAuthRequest(w http.ResponseWriter, r *http.Request) {
-	var authController domain.AuthController
+	var authController contract.AuthController
 
 	if err := container.Resolve(&authController); err != nil {
 		log.Printf("[ERROR] Setting Up Auth Controller: %s", err.Error())

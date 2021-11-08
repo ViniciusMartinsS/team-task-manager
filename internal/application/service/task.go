@@ -10,14 +10,14 @@ import (
 
 type taskService struct {
 	taskRepository      contract.TaskRepository
-	userRepository      domain.UserRepository
+	userRepository      contract.UserRepository
 	notificationService domain.NotificationService
 	encryption          domain.EncryptionService
 }
 
 func NewTaskService(
 	taskRepository contract.TaskRepository,
-	userRepository domain.UserRepository,
+	userRepository contract.UserRepository,
 	notificationService domain.NotificationService,
 	encryption domain.EncryptionService,
 ) contract.TaskService {

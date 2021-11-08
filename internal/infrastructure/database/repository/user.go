@@ -2,6 +2,7 @@ package repository
 
 import (
 	"github.com/ViniciusMartinsS/manager/internal/domain"
+	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"gorm.io/gorm"
 )
 
@@ -9,7 +10,7 @@ type userRepository struct {
 	conn *gorm.DB
 }
 
-func NewUserRepository(conn *gorm.DB) domain.UserRepository {
+func NewUserRepository(conn *gorm.DB) contract.UserRepository {
 	return userRepository{conn}
 }
 

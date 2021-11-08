@@ -6,13 +6,14 @@ import (
 
 	"github.com/ViniciusMartinsS/manager/internal/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain"
+	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 )
 
 type notificationService struct {
-	userRepository domain.UserRepository
+	userRepository contract.UserRepository
 }
 
-func NewNotificationService(userRepository domain.UserRepository) domain.NotificationService {
+func NewNotificationService(userRepository contract.UserRepository) domain.NotificationService {
 	return notificationService{userRepository}
 }
 

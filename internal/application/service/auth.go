@@ -4,14 +4,15 @@ import (
 	constants "github.com/ViniciusMartinsS/manager/internal/common"
 	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain"
+	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type authService struct {
-	userRepository domain.UserRepository
+	userRepository contract.UserRepository
 }
 
-func NewAuthService(userRepository domain.UserRepository) domain.AuthService {
+func NewAuthService(userRepository contract.UserRepository) contract.AuthService {
 	return authService{userRepository}
 }
 
