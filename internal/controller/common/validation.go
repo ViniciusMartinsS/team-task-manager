@@ -26,11 +26,15 @@ var validate *validator.Validate
 
 func ValidateLoginSchema(body []byte) error {
 	var login model.LoginPayload
-	_ = json.Unmarshal(body, &login)
+
+	err := json.Unmarshal(body, &login)
+	if err != nil {
+		return err
+	}
 
 	validate = validator.New()
 
-	err := validate.Struct(login)
+	err = validate.Struct(login)
 	if err == nil {
 		return nil
 	}
