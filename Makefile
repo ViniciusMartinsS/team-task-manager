@@ -1,10 +1,13 @@
 migrate:
 
 setup:
-	# @go mod download
+	@go mod download
 	@go run cmd/database/main.go
-	# @go get -d gotest.tools/gotestsum
-	# @go get -d github.com/go-courier/husky/cmd/husky && husky init
+	@go get -d gotest.tools/gotestsum
+	@go get -d github.com/go-courier/husky/cmd/husky && husky init
+
+docker:
+	@docker-compose up --build
 
 migrate:
 	@go run cmd/database/main.go
