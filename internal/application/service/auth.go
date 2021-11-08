@@ -11,8 +11,6 @@ type authService struct {
 	userRepository domain.UserRepository
 }
 
-var errorNotAuthorized = "record not found"
-
 func NewAuthService(userRepository domain.UserRepository) domain.AuthService {
 	return authService{userRepository}
 }
@@ -20,7 +18,7 @@ func NewAuthService(userRepository domain.UserRepository) domain.AuthService {
 func (a authService) Login(email, password string) domain.LoginResponse {
 	user, err := a.userRepository.FindByEmail(email)
 
-	if err != nil && errorNotAuthorized == err.Error() {
+	if err != nil && constants.DB_ERROR_NOT_AUTHORIZED == err.Error() {
 		return domain.LoginResponse{
 			Code:    constants.NOT_AUTHORIZED_ERROR_CODE,
 			Message: constants.NOT_AUTHORIZED_ERROR_MESSAGE,

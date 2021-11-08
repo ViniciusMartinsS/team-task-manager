@@ -5,32 +5,27 @@ import (
 	"fmt"
 	"regexp"
 
+	constants "github.com/ViniciusMartinsS/manager/internal/common"
+	"github.com/ViniciusMartinsS/manager/internal/domain"
 	"github.com/go-playground/validator/v10"
 )
-
-type Login struct {
-	Email    string `validate:"required,email"`
-	Password string `validate:"required"`
-}
 
 type TaskCreate struct {
 	Name      string  `validate:"required"`
 	Summary   string  `validate:"required,max=2500"`
-	Performed *string `json:",omitempty" validate:"len=10"`
+	Performed *string `json:",omitempty"`
 }
 
 type TaskUpdate struct {
 	Name      string  `json:",omitempty"`
 	Summary   string  `json:",omitempty" validate:"max=2500"`
-	Performed *string `json:",omitempty" validate:"len=10"`
+	Performed *string `json:",omitempty"`
 }
 
 var validate *validator.Validate
 
-const REGEX = `^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$`
-
 func ValidateLoginSchema(body []byte) error {
-	var login Login
+	var login domain.LoginPayload
 	_ = json.Unmarshal(body, &login)
 
 	validate = validator.New()
@@ -69,7 +64,6 @@ func ValidateTaskUpdateSchema(body []byte) error {
 	validate = validator.New()
 
 	err := validate.Struct(task)
-	fmt.Println(err)
 	if err != nil {
 		return err
 	}
@@ -87,11 +81,11 @@ func ValidateDateFormat(performed *string) error {
 		return nil
 	}
 
-	matched, _ := regexp.MatchString(REGEX, *performed)
+	matched, _ := regexp.MatchString(constants.DATE_REGEX, *performed)
 	if matched {
 		return nil
 	}
 
-	err := fmt.Errorf("key: 'TaskCreate.Summary' Error:Field validation for 'Performed' failed on the 'format' regex")
+	err := fmt.Errorf(constants.DATE_BAD_REQUEST)
 	return err
 }
