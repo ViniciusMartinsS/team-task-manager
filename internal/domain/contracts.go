@@ -28,17 +28,17 @@ type AuthService interface {
 }
 
 type TaskController interface {
-	List(HandleTaskRequest) (TaskResponse, int)
-	Create(HandleTaskRequest) (TaskResponse, int)
-	Update(HandleTaskRequest) (TaskResponse, int)
-	Delete(HandleTaskRequest) (TaskResponse, int)
+	List(HandleTaskRequest) TaskResponse
+	Create(HandleTaskRequest) TaskResponse
+	Update(HandleTaskRequest) TaskResponse
+	Delete(HandleTaskRequest) TaskResponse
 }
 
 type TaskService interface {
-	List(userId int) (TaskResponse, int)
-	Create(userId int, payload TaskPayload) (TaskResponse, int)
-	Update(id int, userId int, payload TaskPayload) (TaskResponse, int)
-	Delete(id int, userId int) (TaskResponse, int)
+	List(userId int) TaskResponse
+	Create(userId int, payload TaskPayload) TaskResponse
+	Update(id int, userId int, payload TaskPayload) TaskResponse
+	Delete(id int, userId int) TaskResponse
 }
 
 type NotificationService interface {

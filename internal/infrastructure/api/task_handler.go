@@ -12,7 +12,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type TASK_HANDLER func(domain.HandleTaskRequest) (domain.TaskResponse, int)
+type TASK_HANDLER func(domain.HandleTaskRequest) domain.TaskResponse
 
 func handleTaskRequest(w http.ResponseWriter, r *http.Request) {
 	var taskController domain.TaskController
@@ -35,10 +35,11 @@ func handleTaskRequest(w http.ResponseWriter, r *http.Request) {
 
 	params := domain.HandleTaskRequest{Body: body, UserId: userId, TaskId: taskId}
 
-	response, code := requestHandler(params)
+	response := requestHandler(params)
+	httpStatusCode := HTTP_CODE[response.Code]
 
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(code)
+	w.WriteHeader(httpStatusCode)
 
 	json.NewEncoder(w).Encode(response)
 }

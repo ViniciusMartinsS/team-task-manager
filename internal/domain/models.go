@@ -56,7 +56,7 @@ type TaskPayload struct {
 }
 
 type TaskResponse struct {
-	Status  bool                  `json:"status"`
+	Code    int                   `json:"status"`
 	Result  []TaskResponseContent `json:"result,omitempty"`
 	Message string                `json:"message,omitempty"`
 }
@@ -66,11 +66,6 @@ type TaskResponseContent struct {
 	Name      string `json:"name,omitempty"`
 	Summary   string `json:"summary,omitempty"`
 	Performed string `json:"Performed,omitempty"`
-}
-
-type ErrorResponse struct {
-	Code    int
-	Message string
 }
 
 type HandleTaskRequest struct {
