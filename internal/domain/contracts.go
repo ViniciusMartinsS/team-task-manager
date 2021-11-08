@@ -6,10 +6,6 @@ type Database interface {
 	SeedTables()
 }
 
-type NotificationService interface {
-	Notify(task Task)
-}
-
 type EncryptionService interface {
 	Encrypt(content string) string
 	Decrypt(contentEncrypted string) string

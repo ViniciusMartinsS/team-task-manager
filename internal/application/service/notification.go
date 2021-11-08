@@ -13,7 +13,7 @@ type notificationService struct {
 	userRepository contract.UserRepository
 }
 
-func NewNotificationService(userRepository contract.UserRepository) domain.NotificationService {
+func NewNotificationService(userRepository contract.UserRepository) contract.NotificationService {
 	return notificationService{userRepository}
 }
 
