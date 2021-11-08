@@ -29,7 +29,3 @@ func InitializeDIContainers() {
 	container.Singleton(controller.NewAuthController)
 	container.Singleton(controller.NewTaskController)
 }
-
-// container.NamedSingleton("KafkaClient", func() string {
-// 	return infrastructure.GetConfig("kafka.client")
-// })

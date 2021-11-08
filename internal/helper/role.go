@@ -1,7 +1,7 @@
 package helper
 
-var MANAGER = "Manager"
-var TECHNICIAN = "Technician"
+const MANAGER = "Manager"
+const TECHNICIAN = "Technician"
 
 func IsManager(role string) bool {
 	return role == MANAGER

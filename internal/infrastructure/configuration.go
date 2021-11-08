@@ -19,7 +19,6 @@ func _loadConfigFile() {
 	cfg.SetConfigType("json")
 }
 
-// GetConfig ...
 func GetConfig(key string) string {
 	if isLoaded {
 		return cfg.Get(key).(string)

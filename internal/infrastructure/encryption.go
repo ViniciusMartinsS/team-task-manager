@@ -61,7 +61,6 @@ func (e encryption) Decrypt(contentEncrypted string) string {
 	}
 
 	nonceSize := aesGCM.NonceSize()
-	fmt.Println("\n\n\n\n\n", nonceSize)
 	nonce, ciphertext := enc[:nonceSize], enc[nonceSize:]
 
 	plaintext, err := aesGCM.Open(nil, nonce, ciphertext, nil)
