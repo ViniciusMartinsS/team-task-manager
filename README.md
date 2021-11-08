@@ -1,24 +1,6 @@
 # Task Manager
 This service aims to manage tasks performed during a working day.
 
-## Getting Started
-
-#### Clone Repository
-```
-$ git clone https://github.com/ViniciusMartinsS/team-task-manager.git
-```
-
-#### Running on docker
-```
-$ make docker
-```
-
-#### Running on locally
-```
-$ make setup
-$ make run
-```
-
 ## API Documentation
 
 <details>
@@ -261,8 +243,25 @@ $ make run
 
 </details>
 
+### Run On Postman
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/955776fb0c44d8d9235f)
 
+## Developer Guideline
 
-<!--
-#### Postman Collection:
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/671b82a64b22a20a683e) -->
+### Getting Started
+
+#### Clone Repository
+```
+$ git clone https://github.com/ViniciusMartinsS/team-task-manager.git
+```
+
+#### Running on docker
+```
+$ make docker
+```
+
+#### Running on locally
+```
+$ make setup
+$ make run
+```
