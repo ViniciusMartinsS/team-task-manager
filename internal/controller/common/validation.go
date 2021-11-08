@@ -40,11 +40,14 @@ func ValidateLoginSchema(body []byte) error {
 
 func ValidateTaskCreateSchema(body []byte) error {
 	var task TaskCreate
-	_ = json.Unmarshal(body, &task)
+	err := json.Unmarshal(body, &task)
+	if err != nil {
+		return err
+	}
 
 	validate = validator.New()
 
-	err := validate.Struct(task)
+	err = validate.Struct(task)
 	if err != nil {
 		return err
 	}
@@ -59,11 +62,14 @@ func ValidateTaskCreateSchema(body []byte) error {
 
 func ValidateTaskUpdateSchema(body []byte) error {
 	var task TaskUpdate
-	_ = json.Unmarshal(body, &task)
+	err := json.Unmarshal(body, &task)
+	if err != nil {
+		return err
+	}
 
 	validate = validator.New()
 
-	err := validate.Struct(task)
+	err = validate.Struct(task)
 	if err != nil {
 		return err
 	}

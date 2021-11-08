@@ -5,21 +5,22 @@ import (
 
 	constants "github.com/ViniciusMartinsS/manager/internal/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain"
+	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 )
 
 type taskService struct {
-	taskRepository      domain.TaskRepository
+	taskRepository      contract.TaskRepository
 	userRepository      domain.UserRepository
 	notificationService domain.NotificationService
 	encryption          domain.EncryptionService
 }
 
 func NewTaskService(
-	taskRepository domain.TaskRepository,
+	taskRepository contract.TaskRepository,
 	userRepository domain.UserRepository,
 	notificationService domain.NotificationService,
 	encryption domain.EncryptionService,
-) domain.TaskService {
+) contract.TaskService {
 	return taskService{taskRepository, userRepository, notificationService, encryption}
 }
 

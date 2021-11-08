@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/ViniciusMartinsS/manager/internal/domain"
+	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"gorm.io/gorm"
 )
 
@@ -11,7 +12,7 @@ type taskRepository struct {
 	conn *gorm.DB
 }
 
-func NewTaskRepository(conn *gorm.DB) domain.TaskRepository {
+func NewTaskRepository(conn *gorm.DB) contract.TaskRepository {
 	return taskRepository{conn}
 }
 

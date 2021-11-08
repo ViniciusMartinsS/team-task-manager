@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/ViniciusMartinsS/manager/internal/domain"
+	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"github.com/golobby/container/v3"
 	"github.com/gorilla/mux"
 )
@@ -15,7 +16,7 @@ import (
 type TASK_HANDLER func(domain.HandleTaskRequest) domain.TaskResponse
 
 func handleTaskRequest(w http.ResponseWriter, r *http.Request) {
-	var taskController domain.TaskController
+	var taskController contract.TaskController
 
 	if err := container.Resolve(&taskController); err != nil {
 		log.Printf("[ERROR] Setting Up Task Controller: %s", err.Error())

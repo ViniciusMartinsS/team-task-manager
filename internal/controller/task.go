@@ -7,13 +7,14 @@ import (
 	constants "github.com/ViniciusMartinsS/manager/internal/common"
 	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain"
+	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 )
 
 type taskController struct {
-	taskService domain.TaskService
+	taskService contract.TaskService
 }
 
-func NewTaskController(taskService domain.TaskService) domain.TaskController {
+func NewTaskController(taskService contract.TaskService) contract.TaskController {
 	return taskController{taskService}
 }
 
