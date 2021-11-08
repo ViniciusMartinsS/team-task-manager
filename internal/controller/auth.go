@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain"
-	"github.com/ViniciusMartinsS/manager/internal/helper"
 )
 
 type authController struct {
@@ -19,7 +19,7 @@ func NewAuthController(authService domain.AuthService) domain.AuthController {
 func (a authController) Login(body []byte) (domain.LoginResponse, int) {
 	var payload domain.LoginPayload
 
-	err := helper.ValidateLoginSchema(body)
+	err := common.ValidateLoginSchema(body)
 	if err != nil {
 		code := http.StatusBadRequest
 		result := domain.LoginResponse{Message: http.StatusText(code)}

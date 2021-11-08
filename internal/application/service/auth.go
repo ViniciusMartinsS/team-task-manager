@@ -3,8 +3,8 @@ package service
 import (
 	"net/http"
 
+	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain"
-	"github.com/ViniciusMartinsS/manager/internal/helper"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -37,6 +37,6 @@ func (a authService) Login(email, password string) (domain.LoginResponse, int) {
 		return domain.LoginResponse{Message: http.StatusText(code)}, code
 	}
 
-	accessToken := helper.GenerateAccessToken(int(user.ID), email)
+	accessToken := common.GenerateAccessToken(int(user.ID), email)
 	return domain.LoginResponse{Status: true, AccessToken: accessToken}, http.StatusOK
 }

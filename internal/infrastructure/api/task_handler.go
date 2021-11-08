@@ -5,9 +5,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/ViniciusMartinsS/manager/internal/domain"
-	"github.com/ViniciusMartinsS/manager/internal/helper"
 	"github.com/golobby/container/v3"
 	"github.com/gorilla/mux"
 )
@@ -30,7 +30,7 @@ func handleTaskRequest(w http.ResponseWriter, r *http.Request) {
 	}[r.Method]
 
 	body, _ := ioutil.ReadAll(r.Body)
-	userId := helper.GetUserId(r.Header)
+	userId := getUserId(r.Header)
 	taskId := mux.Vars(r)["id"]
 
 	params := domain.HandleTaskRequest{Body: body, UserId: userId, TaskId: taskId}
@@ -41,4 +41,10 @@ func handleTaskRequest(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(code)
 
 	json.NewEncoder(w).Encode(response)
+}
+
+func getUserId(header http.Header) int {
+	headerUserId := header["User"][0]
+	userId, _ := strconv.Atoi(headerUserId)
+	return userId
 }

@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ViniciusMartinsS/manager/internal/helper"
+	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 )
 
 const routeBypassMiddleware = "/auth/login"
@@ -24,7 +24,7 @@ func CheckAccessToken(next http.Handler) http.Handler {
 		}
 		accessToken := strings.ReplaceAll(authorization[0], "Bearer ", "")
 
-		isValid, claims := helper.IsAccessTokenValid(accessToken)
+		isValid, claims := common.IsAccessTokenValid(accessToken)
 		if !isValid {
 			http.Error(w, "Forbidden", http.StatusForbidden)
 			return

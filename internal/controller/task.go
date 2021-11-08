@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain"
-	"github.com/ViniciusMartinsS/manager/internal/helper"
 )
 
 type taskController struct {
@@ -24,7 +24,7 @@ func (t taskController) List(params domain.HandleTaskRequest) (domain.TaskRespon
 func (t taskController) Create(params domain.HandleTaskRequest) (domain.TaskResponse, int) {
 	var payload domain.TaskPayload
 
-	err := helper.ValidateTaskCreateSchema(params.Body)
+	err := common.ValidateTaskCreateSchema(params.Body)
 	if err != nil {
 		code := http.StatusBadRequest
 		result := domain.TaskResponse{Message: http.StatusText(code)}
@@ -63,7 +63,7 @@ func (t taskController) Update(params domain.HandleTaskRequest) (domain.TaskResp
 		return result, code
 	}
 
-	err = helper.ValidateTaskUpdateSchema(params.Body)
+	err = common.ValidateTaskUpdateSchema(params.Body)
 	if err != nil {
 		code := http.StatusBadRequest
 		result := domain.TaskResponse{Message: http.StatusText(code)}

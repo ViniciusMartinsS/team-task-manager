@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/ViniciusMartinsS/manager/internal/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain"
-	"github.com/ViniciusMartinsS/manager/internal/helper"
 )
 
 type notificationService struct {
@@ -23,6 +23,6 @@ func (n notificationService) Notify(task domain.Task) {
 		return
 	}
 
-	date := helper.DateToStr(task.Performed)
+	date := common.DateToStr(task.Performed)
 	fmt.Printf("\n[NOTIFICATION] The tech %s performed the task %s on date %s\n", row.Name, task.Name, date)
 }

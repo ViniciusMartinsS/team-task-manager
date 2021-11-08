@@ -45,7 +45,7 @@ type NotificationService interface {
 	Notify(task Task)
 }
 
-type Encryption interface {
+type EncryptionService interface {
 	Encrypt(content string) string
 	Decrypt(contentEncrypted string) string
 }

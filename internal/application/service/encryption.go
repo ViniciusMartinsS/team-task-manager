@@ -1,4 +1,4 @@
-package infrastructure
+package service
 
 import (
 	"crypto/aes"
@@ -11,15 +11,15 @@ import (
 	"github.com/ViniciusMartinsS/manager/internal/domain"
 )
 
-type encryption struct{}
+type encryptionService struct{}
 
 const keyString = "c286ff708a66d36d85bad3b4f00ae35b92a6f950671cf45375e8a9b007a11967" // env
 
-func NewEncryption() domain.Encryption {
-	return encryption{}
+func NewEncryption() domain.EncryptionService {
+	return encryptionService{}
 }
 
-func (e encryption) Encrypt(content string) string {
+func (e encryptionService) Encrypt(content string) string {
 	key, _ := hex.DecodeString(keyString)
 	plaintext := []byte(content)
 
@@ -42,7 +42,7 @@ func (e encryption) Encrypt(content string) string {
 	return fmt.Sprintf("%x", ciphertext)
 }
 
-func (e encryption) Decrypt(contentEncrypted string) string {
+func (e encryptionService) Decrypt(contentEncrypted string) string {
 	if contentEncrypted == "" {
 		return ""
 	}

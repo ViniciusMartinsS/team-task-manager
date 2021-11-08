@@ -1,4 +1,4 @@
-package helper
+package common
 
 const MANAGER = "Manager"
 const TECHNICIAN = "Technician"

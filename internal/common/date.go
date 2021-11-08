@@ -1,8 +1,6 @@
-package helper
+package common
 
-import (
-	"time"
-)
+import "time"
 
 var format = "02/01/2006"
 

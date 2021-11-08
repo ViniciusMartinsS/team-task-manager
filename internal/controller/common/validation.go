@@ -1,4 +1,4 @@
-package helper
+package common
 
 import (
 	"encoding/json"
@@ -21,7 +21,7 @@ type TaskCreate struct {
 
 type TaskUpdate struct {
 	Name      string  `json:",omitempty"`
-	Summary   string  `json:",omitempty" validate:"len=2500"`
+	Summary   string  `json:",omitempty" validate:"max=2500"`
 	Performed *string `json:",omitempty" validate:"len=10"`
 }
 
@@ -69,6 +69,7 @@ func ValidateTaskUpdateSchema(body []byte) error {
 	validate = validator.New()
 
 	err := validate.Struct(task)
+	fmt.Println(err)
 	if err != nil {
 		return err
 	}

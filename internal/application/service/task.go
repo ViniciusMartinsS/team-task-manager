@@ -3,22 +3,22 @@ package service
 import (
 	"net/http"
 
+	"github.com/ViniciusMartinsS/manager/internal/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain"
-	"github.com/ViniciusMartinsS/manager/internal/helper"
 )
 
 type taskService struct {
 	taskRepository      domain.TaskRepository
 	userRepository      domain.UserRepository
 	notificationService domain.NotificationService
-	encryption          domain.Encryption
+	encryption          domain.EncryptionService
 }
 
 func NewTaskService(
 	taskRepository domain.TaskRepository,
 	userRepository domain.UserRepository,
 	notificationService domain.NotificationService,
-	encryption domain.Encryption,
+	encryption domain.EncryptionService,
 ) domain.TaskService {
 	return taskService{taskRepository, userRepository, notificationService, encryption}
 }
@@ -32,11 +32,11 @@ func (t taskService) List(userId int) (domain.TaskResponse, int) {
 		return domain.TaskResponse{Message: http.StatusText(code)}, code
 	}
 
-	if helper.IsManager(user.Role.Name) {
+	if common.IsManager(user.Role.Name) {
 		rows, err = t.taskRepository.FindAll()
 	}
 
-	if helper.IsTechnician(user.Role.Name) {
+	if common.IsTechnician(user.Role.Name) {
 		rows, err = t.taskRepository.FindByUserId(userId)
 	}
 
@@ -63,7 +63,7 @@ func (t taskService) Create(userId int, payload domain.TaskPayload) (domain.Task
 	task := domain.Task{
 		Name:      payload.Name,
 		Summary:   t.encryption.Encrypt(payload.Summary),
-		Performed: helper.StrToDate(payload.Performed),
+		Performed: common.StrToDate(payload.Performed),
 		UserId:    userId,
 	}
 
@@ -87,7 +87,7 @@ func (t taskService) Update(id int, userId int, payload domain.TaskPayload) (dom
 	task := domain.Task{
 		Name:      payload.Name,
 		Summary:   payload.Summary,
-		Performed: helper.StrToDate(payload.Performed),
+		Performed: common.StrToDate(payload.Performed),
 		UserId:    userId,
 	}
 
@@ -119,7 +119,7 @@ func (t taskService) Delete(id int, userId int) (domain.TaskResponse, int) {
 		return domain.TaskResponse{Message: http.StatusText(code)}, code
 	}
 
-	if helper.IsTechnician(user.Role.Name) {
+	if common.IsTechnician(user.Role.Name) {
 		code := http.StatusForbidden
 		return domain.TaskResponse{Message: http.StatusText(code)}, code
 	}
@@ -139,6 +139,6 @@ func (t taskService) formatResponse(response domain.Task) domain.TaskResponseCon
 		ID:        int(response.ID),
 		Name:      response.Name,
 		Summary:   t.encryption.Decrypt(response.Summary),
-		Performed: helper.DateToStr(response.Performed),
+		Performed: common.DateToStr(response.Performed),
 	}
 }
