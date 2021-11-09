@@ -312,15 +312,15 @@ $ make migrate
 
 **- Run Lint Checker**
 ```
-make lint
+$ make lint
 ```
 
 **- Run Tests**
 ```bash
-make tests
+$ make tests
 ```
 
 **- Generate Test Coverage File**
 ```bash
-make coverage
+$ make coverage
 ```
