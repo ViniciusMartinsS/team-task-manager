@@ -46,8 +46,7 @@ This service aims to manage tasks performed during a working day.
   ```json
   {
     "status": 100,
-    "message": "Key: 'LoginPayload.Email' Error:Field validation for 'Email' failed on the 'required' tag
-    Key: 'LoginPayload.Password' Error:Field validation for 'Password' failed on the 'required' tag"
+    "message": "Key: 'LoginPayload.Email' Error:Field validation for 'Email' failed on the 'required' tag\nKey: 'LoginPayload.Password' Error:Field validation for 'Password' failed on the 'required' tag"
   }
   ```
 
@@ -181,8 +180,7 @@ This service aims to manage tasks performed during a working day.
   ```json
   {
     "status": 100,
-    "message": "Key: 'TaskCreateDTO.Name' Error:Field validation for 'Name' failed on the 'required' tag
-    Key: 'TaskCreateDTO.Summary' Error:Field validation for 'Summary' failed on the 'required' tag"
+    "message": "Key: 'TaskCreateDTO.Name' Error:Field validation for 'Name' failed on the 'required' tag\nKey: 'TaskCreateDTO.Summary' Error:Field validation for 'Summary' failed on the 'required' tag"
   }
   ```
 
@@ -321,19 +319,40 @@ This service aims to manage tasks performed during a working day.
 </details>
 
 <details>
-  <summary><b>Delete Task</b></summary>
+  <summary><b>API Erros Description</b></summary>
+  
+  </br>
 
-  > **Here you are going to find out what our errors mean**
-
-  | Code | Message  | HTTP Code  |
-  | :---:   | :-: | :-: |
-  | 0 | Success - Return Created Object | 200 |
-  | 100 | Bad Request - Returns Invalid Fields | 400 |
-  | 101 | Stop Right There! You Are Unauthorized! | 401 |
-  | 103 | Hmmmm... It seems you are not allowed to do such a thing. Ask for your manager help! | 403 |
-  | 104 | Hmmmm... We could not find the requested record. Are you sure it exists? Are you sure it belongs to you? **OR** You do not have any tasks. Create a new one & let's get to work! ;) | 404 |
-  | 199 | Something is broken on our side :(. Sorry for the inconvenience! | 500 |
-
+  > **Here you are going to find out the description of our API errors**
+    
+  ```
+  Code: 0 
+  Message: Success - Returns Created Object
+  HTTP Status: 200
+  
+  Code: 100 
+  Message: Bad Request - Returns Invalid Fields
+  HTTP Status: 400 
+  
+  Code: 101 
+  Message: Stop Right There! You Are Unauthorized!
+  HTTP Status: 401
+  
+  Code: 103 
+  Message: Hmmmm... It seems you are not allowed to do such a thing. Ask for your manager help!
+  HTTP Status: 403
+  
+  Code: 104 
+  Message (UPDATE/DELETE): Hmmmm... We could not find the requested record. Are you sure it exists? Are you sure it belongs to you?
+  Message (LIST): You do not have any tasks. Create a new one & let's get to work! ;
+  HTTP Status: 404
+  
+  Code: 199 
+  Message: Something is broken on our side :(. Sorry for the inconvenience!
+  HTTP Status: 500
+  
+  ```
+  
 </details>
 
 ### Run In Postman
