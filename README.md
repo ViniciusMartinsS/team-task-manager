@@ -66,15 +66,15 @@ This service aims to manage tasks performed during a working day.
 
   ```
   Technician 01
-   Email: john.doe@hotmail.com
+   Email: john.doe@example.com
    Password: Sw@rd2021
 
   Technician 02
-   Email: john.doe@hotmail.com
+   Email: julius.rock@example.com"
    Password: Sw@rd2021
 
   Manager
-    Email: john.doe@hotmail.com
+    Email: jane.doe@example.com
     Password: Sw@rd2021
   ```
 
@@ -320,39 +320,39 @@ This service aims to manage tasks performed during a working day.
 
 <details>
   <summary><b>API Erros Description</b></summary>
-  
+
   </br>
 
   > **Here you are going to find out the description of our API errors**
-    
+
   ```
-  Code: 0 
+  Code: 0
   Message: Success - Returns Created Object
   HTTP Status: 200
-  
-  Code: 100 
+
+  Code: 100
   Message: Bad Request - Returns Invalid Fields
-  HTTP Status: 400 
-  
-  Code: 101 
+  HTTP Status: 400
+
+  Code: 101
   Message: Stop Right There! You Are Unauthorized!
   HTTP Status: 401
-  
-  Code: 103 
+
+  Code: 103
   Message: Hmmmm... It seems you are not allowed to do such a thing. Ask for your manager help!
   HTTP Status: 403
-  
-  Code: 104 
+
+  Code: 104
   Message (UPDATE/DELETE): Hmmmm... We could not find the requested record. Are you sure it exists? Are you sure it belongs to you?
   Message (LIST): You do not have any tasks. Create a new one & let's get to work! ;
   HTTP Status: 404
-  
-  Code: 199 
+
+  Code: 199
   Message: Something is broken on our side :(. Sorry for the inconvenience!
   HTTP Status: 500
-  
+
   ```
-  
+
 </details>
 
 ### Run In Postman
