@@ -93,10 +93,6 @@ func (t taskService) Update(id int, userId int, payload model.TaskPayload) model
 		task.Summary = t.encryption.Encrypt(payload.Summary)
 	}
 
-	if task.Performed != nil {
-		t.notificationService.Notify(task) // go
-	}
-
 	row, err := t.taskRepository.Update(id, userId, task)
 
 	if err != nil && constant.DB_RECORD_NOT_FOUND == err.Error() {
@@ -105,6 +101,10 @@ func (t taskService) Update(id int, userId int, payload model.TaskPayload) model
 
 	if err != nil {
 		return errors.InternalServerErrorResponse
+	}
+
+	if task.Performed != nil {
+		t.notificationService.Notify(row) // go
 	}
 
 	result := make([]model.TaskResponseContent, 0)

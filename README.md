@@ -235,8 +235,9 @@ This service aims to manage tasks performed during a working day.
     "result": [
         {
             "id": 1,
-            "name": "Hello World",
-            "Performed": "07/11/2021"
+            "name": "Task Hello World",
+            "summary": "Hello World! This is my new task",
+            "performed": "20/11/2020"
         }
      ]
   }

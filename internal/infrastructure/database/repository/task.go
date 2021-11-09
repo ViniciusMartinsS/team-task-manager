@@ -86,7 +86,13 @@ func (t taskRepository) Update(id int, userId int, task model.Task) (model.Task,
 		return model.Task{}, fmt.Errorf("record not found")
 	}
 
-	return task, nil
+	response, err := t.FindById(id)
+	if err != nil {
+		log.Println("[ERROR] Executing Update on Task repository: ", err)
+		return model.Task{}, err
+	}
+
+	return response, nil
 }
 
 func (t taskRepository) Delete(id int) error {
