@@ -3,8 +3,8 @@ package application
 import (
 	"testing"
 
-	"github.com/ViniciusMartinsS/manager/internal/application/service"
 	constant "github.com/ViniciusMartinsS/manager/internal/common"
+	"github.com/ViniciusMartinsS/manager/internal/service"
 	"github.com/ViniciusMartinsS/manager/test/mock/infrastructure"
 	. "github.com/onsi/gomega"
 )

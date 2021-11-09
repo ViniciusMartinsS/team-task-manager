@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ViniciusMartinsS/manager/internal/application/service"
 	"github.com/ViniciusMartinsS/manager/internal/domain/model"
+	"github.com/ViniciusMartinsS/manager/internal/service"
 	"github.com/ViniciusMartinsS/manager/test/mock/infrastructure"
 	. "github.com/onsi/gomega"
 )
