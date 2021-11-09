@@ -5,9 +5,9 @@ This service aims to manage tasks performed during a working day.
 
 <details>
   <summary><b>Authentication</b></summary>
-  
+
   </br>
-  
+
   > **Handle API Authentication**
 
   #### URL
@@ -43,6 +43,14 @@ This service aims to manage tasks performed during a working day.
   }
   ```
 
+  ```json
+  {
+    "status": 100,
+    "message": "Key: 'LoginPayload.Email' Error:Field validation for 'Email' failed on the 'required' tag
+    Key: 'LoginPayload.Password' Error:Field validation for 'Password' failed on the 'required' tag"
+  }
+  ```
+
   #### Try it out
   ```bash
   curl --location --request POST 'localhost:3000/auth/login' \
@@ -52,34 +60,34 @@ This service aims to manage tasks performed during a working day.
       "password": "123456"
   }'
   ```
-  
+
   <sub>
-  
+
   **⚠️ Credentials**
-  
+
   ```
-  Technician 01 
-   Email: john.doe@hotmail.com 
+  Technician 01
+   Email: john.doe@hotmail.com
    Password: Sw@rd2021
-  
+
   Technician 02
    Email: john.doe@hotmail.com
    Password: Sw@rd2021
-  
-  Manager 
-    Email: john.doe@hotmail.com 
+
+  Manager
+    Email: john.doe@hotmail.com
     Password: Sw@rd2021
   ```
-  
+
   </sup>
-    
+
 </details>
 
 <details>
   <summary><b>List Tasks</b></summary>
-  
+
   </br>
-  
+
   > **Show all task of a technician**
 
   #### URL
@@ -107,6 +115,14 @@ This service aims to manage tasks performed during a working day.
   }
   ```
 
+  #### Error Response
+  ```json
+  {
+    "status": 104,
+    "message": "You do not have any tasks. Create a new one & let's get to work! ;)"
+  }
+  ```
+
   #### Try it out
   ```bash
   curl --location --request GET 'localhost:3000/tasks' \
@@ -119,7 +135,7 @@ This service aims to manage tasks performed during a working day.
   <summary><b>Create Task</b></summary>
 
   </br>
-  
+
   > **Creates a task for a specific technician**
 
   #### URL
@@ -161,6 +177,15 @@ This service aims to manage tasks performed during a working day.
   }
   ```
 
+  #### Error Response
+  ```json
+  {
+    "status": 100,
+    "message": "Key: 'TaskCreateDTO.Name' Error:Field validation for 'Name' failed on the 'required' tag
+    Key: 'TaskCreateDTO.Summary' Error:Field validation for 'Summary' failed on the 'required' tag"
+  }
+  ```
+
   #### Try it out
   ```bash
   curl --location --request POST 'localhost:3000/tasks' \
@@ -177,9 +202,9 @@ This service aims to manage tasks performed during a working day.
 
 <details>
   <summary><b>Update Task</b></summary>
-  
+
   </br>
-  
+
   > **Update a task of technician**
 
   #### URL
@@ -219,6 +244,21 @@ This service aims to manage tasks performed during a working day.
   }
   ```
 
+  #### Error Response
+  ```json
+  {
+    "status": 100,
+    "message": "key: 'TaskCreate.Summary' Error:Field validation for 'Performed' failed on the 'format' regex"
+  }
+  ```
+
+  ```json
+  {
+    "status": 104,
+    "message": "Hmmmm... We could not find the requested record. Are you sure it exists? Are you sure it belongs to you?"
+  }
+  ```
+
   #### Try it out
   ```bash
   curl --location --request PUT 'localhost:3000/tasks/1' \
@@ -235,7 +275,7 @@ This service aims to manage tasks performed during a working day.
   <summary><b>Delete Task</b></summary>
 
   </br>
-  
+
   > **[MANAGER ONLY] Delete task of a technician**
 
   #### URL
@@ -265,11 +305,34 @@ This service aims to manage tasks performed during a working day.
   }
   ```
 
+  ```json
+  {
+    "status": 104,
+    "message": "Hmmmm... We could not find the requested record. Are you sure it exists? Are you sure it belongs to you?"
+  }
+  ```
+
   #### Try it out
   ```bash
   curl --location --request DELETE 'localhost:3000/tasks/1' \
   --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
   ```
+
+</details>
+
+<details>
+  <summary><b>Delete Task</b></summary>
+
+  > **Here you are going to find out what our errors mean**
+
+  | Code | Message  | HTTP Code  |
+  | :---:   | :-: | :-: |
+  | 0 | Success - Return Created Object | 200 |
+  | 100 | Bad Request - Returns Invalid Fields | 400 |
+  | 101 | Stop Right There! You Are Unauthorized! | 401 |
+  | 103 | Hmmmm... It seems you are not allowed to do such a thing. Ask for your manager help! | 403 |
+  | 104 | Hmmmm... We could not find the requested record. Are you sure it exists? Are you sure it belongs to you? **OR** You do not have any tasks. Create a new one & let's get to work! ;) | 404 |
+  | 199 | Something is broken on our side :(. Sorry for the inconvenience! | 500 |
 
 </details>
 
@@ -292,7 +355,7 @@ $ make docker
 
 **- Run Application Locally**
 
-<sub>⚠️ Before start, on the `config` directory, you must create your `app.json` in order to have the environment variables. 
+<sub>⚠️ Before start, on the `config` directory, you must create your `app.json` in order to have the environment variables.
 On the root of the project, execute the following command:</sup>
 ```
 $ cp config/app-dist.json config/app.json
