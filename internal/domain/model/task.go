@@ -36,5 +36,5 @@ type TaskResponseContent struct {
 	ID        int    `json:"id,omitempty"`
 	Name      string `json:"name,omitempty"`
 	Summary   string `json:"summary,omitempty"`
-	Performed string `json:"Performed,omitempty"`
+	Performed string `json:"performed,omitempty"`
 }

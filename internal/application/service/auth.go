@@ -19,7 +19,7 @@ func NewAuthService(userRepository contract.UserRepository) contract.AuthService
 func (a authService) Login(email, password string) model.LoginResponse {
 	user, err := a.userRepository.FindByEmail(email)
 
-	if err != nil && constant.DB_ERROR_NOT_AUTHORIZED == err.Error() {
+	if err != nil && constant.DB_RECORD_NOT_FOUND == err.Error() {
 		return model.LoginResponse{
 			Code:    constant.NOT_AUTHORIZED_ERROR_CODE,
 			Message: constant.NOT_AUTHORIZED_ERROR_MESSAGE,

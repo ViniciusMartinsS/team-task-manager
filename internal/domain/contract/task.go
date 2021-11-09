@@ -7,7 +7,7 @@ type TaskRepository interface {
 	FindByUserId(id int) ([]model.Task, error)
 	Create(task model.Task) (model.Task, error)
 	Update(id int, userId int, task model.Task) (model.Task, error)
-	Delete(id int) (bool, error)
+	Delete(id int) error
 }
 
 type TaskController interface {

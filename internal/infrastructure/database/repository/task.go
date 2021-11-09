@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
@@ -81,17 +82,25 @@ func (t taskRepository) Update(id int, userId int, task model.Task) (model.Task,
 		return model.Task{}, result.Error
 	}
 
+	if result.RowsAffected == 0 {
+		return model.Task{}, fmt.Errorf("record not found")
+	}
+
 	return task, nil
 }
 
-func (t taskRepository) Delete(id int) (bool, error) {
+func (t taskRepository) Delete(id int) error {
 	result := t.conn.
 		Delete(&model.Task{}, id)
 
 	if result.Error != nil {
 		log.Println("[ERROR] Executing Delete on Task repository: ", result.Error)
-		return false, result.Error
+		return result.Error
 	}
 
-	return true, nil
+	if result.RowsAffected == 0 {
+		return fmt.Errorf("record not found")
+	}
+
+	return nil
 }

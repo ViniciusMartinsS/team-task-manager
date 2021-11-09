@@ -53,7 +53,10 @@ func (t taskService) List(userId int) model.TaskResponse {
 	result := make([]model.TaskResponseContent, len(rows))
 
 	if len(rows) == 0 {
-		return model.TaskResponse{Code: constant.SUCCESS_CODE, Result: result}
+		return model.TaskResponse{
+			Code:    constant.RECORD_NOT_FOUND_ERROR_CODE,
+			Message: constant.RECORD_NOT_FOUND_LIST_MESSAGE,
+		}
 	}
 
 	for i, r := range rows {
@@ -107,6 +110,13 @@ func (t taskService) Update(id int, userId int, payload model.TaskPayload) model
 
 	row, err := t.taskRepository.Update(id, userId, task)
 
+	if err != nil && constant.DB_RECORD_NOT_FOUND == err.Error() {
+		return model.TaskResponse{
+			Code:    constant.RECORD_NOT_FOUND_ERROR_CODE,
+			Message: constant.RECORD_NOT_FOUND_ERROR_MESSAGE,
+		}
+	}
+
 	if err != nil {
 		return model.TaskResponse{
 			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
@@ -136,7 +146,15 @@ func (t taskService) Delete(id int, userId int) model.TaskResponse {
 		}
 	}
 
-	_, err = t.taskRepository.Delete(id)
+	err = t.taskRepository.Delete(id)
+
+	if err != nil && constant.DB_RECORD_NOT_FOUND == err.Error() {
+		return model.TaskResponse{
+			Code:    constant.RECORD_NOT_FOUND_ERROR_CODE,
+			Message: constant.RECORD_NOT_FOUND_ERROR_MESSAGE,
+		}
+	}
+
 	if err != nil {
 		return model.TaskResponse{
 			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
