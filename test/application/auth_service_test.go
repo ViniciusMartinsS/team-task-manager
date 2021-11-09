@@ -27,8 +27,8 @@ func TestAuthService(t *testing.T) {
 		auth := service.NewAuthService(UserRepository).
 			Login(EMAIL_VALID, PASSWORD_VALID)
 
-		g.Expect(auth.AccessToken).To(BeAssignableToTypeOf(accessTokenType))
 		g.Expect(auth.Code).To(Equal(constant.SUCCESS_CODE))
+		g.Expect(auth.AccessToken).To(BeAssignableToTypeOf(accessTokenType))
 		g.Expect(auth.Message).To(BeEmpty())
 	})
 

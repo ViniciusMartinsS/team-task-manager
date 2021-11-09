@@ -25,7 +25,11 @@ func (u userRepositoryMock) FindBydId(id int) (model.User, error) {
 		return model.User{}, fmt.Errorf("internal server error")
 	}
 
-	return model.User{}, nil
+	if id == 1 {
+		return model.User{Role: model.Role{Name: "Technician"}}, nil
+	}
+
+	return model.User{Role: model.Role{Name: "Manager"}}, nil
 }
 
 func (u userRepositoryMock) FindByEmail(email string) (model.User, error) {
