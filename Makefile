@@ -17,3 +17,12 @@ run:
 
 lint:
 	@staticcheck ./...
+
+tests:
+	@gotestsum -f pkgname ./test/application/...
+
+coverage:
+	@go test -v -cover -coverprofile=r.out -coverpkg ./internal/... ./test/...
+	@go tool cover -html=r.out -o report.html
+	@rm -f r.out
+	@google-chrome --new-window report.html

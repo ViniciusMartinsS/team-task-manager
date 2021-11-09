@@ -36,8 +36,8 @@ func (a authService) Login(email, password string) model.LoginResponse {
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	if err != nil {
 		return model.LoginResponse{
-			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
-			Message: constant.INTERNAL_SERVER_ERROR_MESSAGE,
+			Code:    constant.NOT_AUTHORIZED_ERROR_CODE,
+			Message: constant.NOT_AUTHORIZED_ERROR_MESSAGE,
 		}
 	}
 

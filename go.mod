@@ -14,6 +14,32 @@ require (
 )
 
 require (
+	github.com/dnephin/pflag v1.0.7 // indirect
+	github.com/fatih/color v1.13.0 // indirect
+	github.com/go-courier/husky v1.7.2 // indirect
+	github.com/go-courier/semver v1.0.1 // indirect
+	github.com/go-logr/glogr v1.1.0 // indirect
+	github.com/go-logr/logr v1.1.0 // indirect
+	github.com/gobwas/glob v0.2.3 // indirect
+	github.com/golang/glog v1.0.0 // indirect
+	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect
+	github.com/inconshreveable/mousetrap v1.0.0 // indirect
+	github.com/jonboulle/clockwork v0.2.2 // indirect
+	github.com/mattn/go-colorable v0.1.9 // indirect
+	github.com/mattn/go-isatty v0.0.14 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
+	github.com/spf13/cobra v1.2.1 // indirect
+	golang.org/x/mod v0.4.2 // indirect
+	golang.org/x/net v0.0.0-20210503060351-7fd8e65b6420 // indirect
+	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
+	golang.org/x/term v0.0.0-20210916214954-140adaaadfaf // indirect
+	golang.org/x/tools v0.1.5 // indirect
+	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
+	gotest.tools/gotestsum v1.7.0 // indirect
+	mvdan.cc/sh/v3 v3.3.1 // indirect
+)
+
+require (
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
@@ -24,6 +50,7 @@ require (
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/magiconair/properties v1.8.5 // indirect
 	github.com/mitchellh/mapstructure v1.4.2 // indirect
+	github.com/onsi/gomega v1.17.0
 	github.com/pelletier/go-toml v1.9.4 // indirect
 	github.com/spf13/afero v1.6.0 // indirect
 	github.com/spf13/cast v1.4.1 // indirect
