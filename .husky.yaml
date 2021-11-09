@@ -1,0 +1,7 @@
+hooks:
+  pre-commit:
+    - make lint
+    - make tests
+
+lint-commit:
+  header: "^"
