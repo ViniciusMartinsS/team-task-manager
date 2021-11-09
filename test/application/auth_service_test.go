@@ -17,7 +17,7 @@ const (
 	PASSWORD_VALID = "Sw@rd2021"
 )
 
-func TestProcessorApplicationSuite(t *testing.T) {
+func TestAuthService(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	t.Run("Expect login successfully", func(it *testing.T) {
