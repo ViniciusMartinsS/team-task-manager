@@ -17,13 +17,15 @@ func NewNotificationService(userRepository contract.UserRepository) contract.Not
 	return notificationService{userRepository}
 }
 
-func (n notificationService) Notify(task model.Task) {
+func (n notificationService) Notify(task model.Task) bool {
 	row, err := n.userRepository.FindBydId(task.UserId)
 	if err != nil {
 		log.Println("[ERROR] Gathering user to notify")
-		return
+		return false
 	}
 
 	date := common.DateToStr(task.Performed)
 	fmt.Printf("\n[NOTIFICATION] The tech %s performed the task %s on date %s\n", row.Name, task.Name, date)
+
+	return true
 }

@@ -13,4 +13,6 @@ func NewNotificationServiceMock(userRepository contract.UserRepository) contract
 	return notificationRepositoryMock{userRepository}
 }
 
-func (n notificationRepositoryMock) Notify(task model.Task) {}
+func (n notificationRepositoryMock) Notify(task model.Task) bool {
+	return true
+}

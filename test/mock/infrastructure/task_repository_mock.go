@@ -81,5 +81,9 @@ func (t taskRepositoryMock) Delete(id int) error {
 		return fmt.Errorf("internal server error")
 	}
 
+	if t.notFound {
+		return fmt.Errorf("record not found")
+	}
+
 	return nil
 }
