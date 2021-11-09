@@ -69,6 +69,10 @@ func (t taskRepositoryMock) Update(id int, userId int, task model.Task) (model.T
 		return task, fmt.Errorf("internal server error")
 	}
 
+	if t.notFound {
+		return model.Task{}, fmt.Errorf("record not found")
+	}
+
 	return model.Task{}, nil
 }
 
