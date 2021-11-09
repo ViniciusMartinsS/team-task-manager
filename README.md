@@ -278,19 +278,19 @@ This service aims to manage tasks performed during a working day.
 
 ## Developer Guideline
 
-- Clone Repository
+**- Clone Repository**
 ```
 $ git clone https://github.com/ViniciusMartinsS/team-task-manager.git
 ```
 
 ### Useful Commands
 
-- Run Application On Docker
+**- Run Application On Docker**
 ```
 $ make docker
 ```
 
-- Run Application Locally
+**- Run Application Locally**
 
 <sub>⚠️ Before start, on the `config` directory, you must create your `app.json` in order to have the environment variables. 
 On the root of the project, execute the following command:</sup>
@@ -305,22 +305,22 @@ $ make setup
 $ make run
 ```
 
-- Run Database Migration
+**- Run Database Migration**
 ```
 $ make migrate
 ```
 
-- Run Lint Checker
+**- Run Lint Checker**
 ```
 make lint
 ```
 
-- Run Tests
+**- Run Tests**
 ```bash
 make tests
 ```
 
-- Generate Test Coverage File
+**- Generate Test Coverage File**
 ```bash
 make coverage
 ```
