@@ -46,14 +46,14 @@ func (t taskController) Update(params model.HandleTaskRequest) model.TaskRespons
 		return errors.InternalServerErrorResponse
 	}
 
-	err = json.Unmarshal(params.Body, &payload)
-	if err != nil {
-		return errors.InternalServerErrorResponse
-	}
-
 	err = common.ValidateTaskUpdateSchema(params.Body)
 	if err != nil {
 		return errors.BadRequestErrorResponse(err.Error())
+	}
+
+	err = json.Unmarshal(params.Body, &payload)
+	if err != nil {
+		return errors.InternalServerErrorResponse
 	}
 
 	return t.taskService.Update(id, params.UserId, payload)

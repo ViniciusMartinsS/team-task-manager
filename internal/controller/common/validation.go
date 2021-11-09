@@ -10,13 +10,13 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
-type TaskCreateDTO struct {
+type TaskCreate struct {
 	Name      string  `validate:"required"`
 	Summary   string  `validate:"required,max=2500"`
 	Performed *string `json:",omitempty"`
 }
 
-type TaskUpdateDTO struct {
+type TaskUpdate struct {
 	Name      string  `json:",omitempty"`
 	Summary   string  `json:",omitempty" validate:"max=2500"`
 	Performed *string `json:",omitempty"`
@@ -43,7 +43,7 @@ func ValidateLoginSchema(body []byte) error {
 }
 
 func ValidateTaskCreateSchema(body []byte) error {
-	var task TaskCreateDTO
+	var task TaskCreate
 	err := json.Unmarshal(body, &task)
 	if err != nil {
 		return err
@@ -65,7 +65,7 @@ func ValidateTaskCreateSchema(body []byte) error {
 }
 
 func ValidateTaskUpdateSchema(body []byte) error {
-	var task TaskUpdateDTO
+	var task TaskUpdate
 	err := json.Unmarshal(body, &task)
 	if err != nil {
 		return err

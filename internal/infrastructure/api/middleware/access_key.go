@@ -8,11 +8,14 @@ import (
 	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 )
 
-const routeBypassMiddleware = "/auth/login"
+const (
+	ROUTE_BY_PASS_MIDDLEWARE = "/auth/login"
+	BEARER                   = "Bearer "
+)
 
 func CheckAccessToken(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.RequestURI == routeBypassMiddleware {
+		if r.RequestURI == ROUTE_BY_PASS_MIDDLEWARE {
 			next.ServeHTTP(w, r)
 			return
 		}
@@ -22,7 +25,13 @@ func CheckAccessToken(next http.Handler) http.Handler {
 			http.Error(w, "Forbidden", http.StatusForbidden)
 			return
 		}
-		accessToken := strings.ReplaceAll(authorization[0], "Bearer ", "")
+
+		if authorization[0] == "" && strings.Contains(authorization[0], BEARER) {
+			http.Error(w, "Forbidden", http.StatusForbidden)
+			return
+		}
+
+		accessToken := strings.ReplaceAll(authorization[0], BEARER, "")
 
 		isValid, claims := common.IsAccessTokenValid(accessToken)
 		if !isValid {
