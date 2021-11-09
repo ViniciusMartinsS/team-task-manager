@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"strconv"
 
-	constant "github.com/ViniciusMartinsS/manager/internal/common"
+	"github.com/ViniciusMartinsS/manager/internal/common/errors"
 	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"github.com/ViniciusMartinsS/manager/internal/domain/model"
@@ -27,18 +27,12 @@ func (t taskController) Create(params model.HandleTaskRequest) model.TaskRespons
 
 	err := common.ValidateTaskCreateSchema(params.Body)
 	if err != nil {
-		return model.TaskResponse{
-			Code:    constant.BAD_REQUEST_ERROR_CODE,
-			Message: err.Error(),
-		}
+		return errors.BadRequestErrorResponse(err.Error())
 	}
 
 	err = json.Unmarshal(params.Body, &payload)
 	if err != nil {
-		return model.TaskResponse{
-			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
-			Message: constant.INTERNAL_SERVER_ERROR_MESSAGE,
-		}
+		return errors.InternalServerErrorResponse
 	}
 
 	return t.taskService.Create(params.UserId, payload)
@@ -49,26 +43,17 @@ func (t taskController) Update(params model.HandleTaskRequest) model.TaskRespons
 
 	id, err := strconv.Atoi(params.TaskId)
 	if err != nil {
-		return model.TaskResponse{
-			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
-			Message: constant.INTERNAL_SERVER_ERROR_MESSAGE,
-		}
+		return errors.InternalServerErrorResponse
 	}
 
 	err = json.Unmarshal(params.Body, &payload)
 	if err != nil {
-		return model.TaskResponse{
-			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
-			Message: constant.INTERNAL_SERVER_ERROR_MESSAGE,
-		}
+		return errors.InternalServerErrorResponse
 	}
 
 	err = common.ValidateTaskUpdateSchema(params.Body)
 	if err != nil {
-		return model.TaskResponse{
-			Code:    constant.BAD_REQUEST_ERROR_CODE,
-			Message: err.Error(),
-		}
+		return errors.BadRequestErrorResponse(err.Error())
 	}
 
 	return t.taskService.Update(id, params.UserId, payload)

@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	constant "github.com/ViniciusMartinsS/manager/internal/common"
+	"github.com/ViniciusMartinsS/manager/internal/common/errors"
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"github.com/ViniciusMartinsS/manager/internal/domain/model"
 )
@@ -29,10 +30,7 @@ func (t taskService) List(userId int) model.TaskResponse {
 
 	user, err := t.userRepository.FindBydId(userId)
 	if err != nil {
-		return model.TaskResponse{
-			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
-			Message: constant.INTERNAL_SERVER_ERROR_MESSAGE,
-		}
+		return errors.InternalServerErrorResponse
 	}
 
 	if constant.IsManager(user.Role.Name) {
@@ -44,19 +42,13 @@ func (t taskService) List(userId int) model.TaskResponse {
 	}
 
 	if err != nil {
-		return model.TaskResponse{
-			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
-			Message: constant.INTERNAL_SERVER_ERROR_MESSAGE,
-		}
+		return errors.InternalServerErrorResponse
 	}
 
 	result := make([]model.TaskResponseContent, len(rows))
 
 	if len(rows) == 0 {
-		return model.TaskResponse{
-			Code:    constant.RECORD_NOT_FOUND_ERROR_CODE,
-			Message: constant.RECORD_NOT_FOUND_LIST_MESSAGE,
-		}
+		return errors.ListRecordNotFoundErrorResponse
 	}
 
 	for i, r := range rows {
@@ -80,10 +72,7 @@ func (t taskService) Create(userId int, payload model.TaskPayload) model.TaskRes
 
 	row, err := t.taskRepository.Create(task)
 	if err != nil {
-		return model.TaskResponse{
-			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
-			Message: constant.INTERNAL_SERVER_ERROR_MESSAGE,
-		}
+		return errors.InternalServerErrorResponse
 	}
 
 	result := make([]model.TaskResponseContent, 0)
@@ -111,17 +100,11 @@ func (t taskService) Update(id int, userId int, payload model.TaskPayload) model
 	row, err := t.taskRepository.Update(id, userId, task)
 
 	if err != nil && constant.DB_RECORD_NOT_FOUND == err.Error() {
-		return model.TaskResponse{
-			Code:    constant.RECORD_NOT_FOUND_ERROR_CODE,
-			Message: constant.RECORD_NOT_FOUND_ERROR_MESSAGE,
-		}
+		return errors.RecordNotFoundErrorResponse
 	}
 
 	if err != nil {
-		return model.TaskResponse{
-			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
-			Message: constant.INTERNAL_SERVER_ERROR_MESSAGE,
-		}
+		return errors.InternalServerErrorResponse
 	}
 
 	result := make([]model.TaskResponseContent, 0)
@@ -133,10 +116,7 @@ func (t taskService) Update(id int, userId int, payload model.TaskPayload) model
 func (t taskService) Delete(id int, userId int) model.TaskResponse {
 	user, err := t.userRepository.FindBydId(userId)
 	if err != nil {
-		return model.TaskResponse{
-			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
-			Message: constant.INTERNAL_SERVER_ERROR_MESSAGE,
-		}
+		return errors.InternalServerErrorResponse
 	}
 
 	if constant.IsTechnician(user.Role.Name) {
@@ -149,17 +129,11 @@ func (t taskService) Delete(id int, userId int) model.TaskResponse {
 	err = t.taskRepository.Delete(id)
 
 	if err != nil && constant.DB_RECORD_NOT_FOUND == err.Error() {
-		return model.TaskResponse{
-			Code:    constant.RECORD_NOT_FOUND_ERROR_CODE,
-			Message: constant.RECORD_NOT_FOUND_ERROR_MESSAGE,
-		}
+		return errors.RecordNotFoundErrorResponse
 	}
 
 	if err != nil {
-		return model.TaskResponse{
-			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
-			Message: constant.INTERNAL_SERVER_ERROR_MESSAGE,
-		}
+		return errors.InternalServerErrorResponse
 	}
 
 	message := fmt.Sprintf(constant.SUCCESS_DELETE_MESSAGE, id)

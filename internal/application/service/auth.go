@@ -2,6 +2,7 @@ package service
 
 import (
 	constant "github.com/ViniciusMartinsS/manager/internal/common"
+	"github.com/ViniciusMartinsS/manager/internal/common/errors"
 	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"github.com/ViniciusMartinsS/manager/internal/domain/model"
@@ -20,25 +21,16 @@ func (a authService) Login(email, password string) model.LoginResponse {
 	user, err := a.userRepository.FindByEmail(email)
 
 	if err != nil && constant.DB_RECORD_NOT_FOUND == err.Error() {
-		return model.LoginResponse{
-			Code:    constant.NOT_AUTHORIZED_ERROR_CODE,
-			Message: constant.NOT_AUTHORIZED_ERROR_MESSAGE,
-		}
+		return errors.AuthNotAuthorizedErrorResponse
 	}
 
 	if err != nil {
-		return model.LoginResponse{
-			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
-			Message: constant.INTERNAL_SERVER_ERROR_MESSAGE,
-		}
+		return errors.AuthInternalServerErrorResponse
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	if err != nil {
-		return model.LoginResponse{
-			Code:    constant.NOT_AUTHORIZED_ERROR_CODE,
-			Message: constant.NOT_AUTHORIZED_ERROR_MESSAGE,
-		}
+		return errors.AuthNotAuthorizedErrorResponse
 	}
 
 	accessToken := common.GenerateAccessToken(int(user.ID), email)

@@ -3,7 +3,7 @@ package controller
 import (
 	"encoding/json"
 
-	constant "github.com/ViniciusMartinsS/manager/internal/common"
+	"github.com/ViniciusMartinsS/manager/internal/common/errors"
 	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"github.com/ViniciusMartinsS/manager/internal/domain/model"
@@ -22,18 +22,12 @@ func (a authController) Login(body []byte) model.LoginResponse {
 
 	err := common.ValidateLoginSchema(body)
 	if err != nil {
-		return model.LoginResponse{
-			Code:    constant.BAD_REQUEST_ERROR_CODE,
-			Message: err.Error(),
-		}
+		return errors.AuthBadRequestErrorResponse(err.Error())
 	}
 
 	err = json.Unmarshal(body, &payload)
 	if err != nil {
-		return model.LoginResponse{
-			Code:    constant.INTERNAL_SERVER_ERROR_CODE,
-			Message: constant.INTERNAL_SERVER_ERROR_MESSAGE,
-		}
+		return errors.AuthInternalServerErrorResponse
 	}
 
 	return a.authService.Login(payload.Email, payload.Password)
