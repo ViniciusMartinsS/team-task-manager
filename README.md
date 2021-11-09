@@ -5,8 +5,10 @@ This service aims to manage tasks performed during a working day.
 
 <details>
   <summary><b>Authentication</b></summary>
-
-  <p><b>Handle API Authentication</b></p>
+  
+  </br>
+  
+  > **Handle API Authentication**
 
   #### URL
   `/auth/login`
@@ -50,13 +52,35 @@ This service aims to manage tasks performed during a working day.
       "password": "123456"
   }'
   ```
-
+  
+  <sub>
+  
+  **⚠️ Credentials**
+  
+  ```
+  Technician 01 
+   Email: john.doe@hotmail.com 
+   Password: Sw@rd2021
+  
+  Technician 02
+   Email: john.doe@hotmail.com
+   Password: Sw@rd2021
+  
+  Manager 
+    Email: john.doe@hotmail.com 
+    Password: Sw@rd2021
+  ```
+  
+  </sup>
+    
 </details>
 
 <details>
   <summary><b>List Tasks</b></summary>
-
-  <p><b>Show all task of a technician</b></p>
+  
+  </br>
+  
+  > **Show all task of a technician**
 
   #### URL
   `/tasks`
@@ -94,7 +118,9 @@ This service aims to manage tasks performed during a working day.
 <details>
   <summary><b>Create Task</b></summary>
 
-  <p><b>Creates a task for a specific technician</b></p>
+  </br>
+  
+  > **Creates a task for a specific technician**
 
   #### URL
   `/tasks`
@@ -151,8 +177,10 @@ This service aims to manage tasks performed during a working day.
 
 <details>
   <summary><b>Update Task</b></summary>
-
-  <p><b>Update a task of technician</b></p>
+  
+  </br>
+  
+  > **Update a task of technician**
 
   #### URL
   `/tasks/:id`
@@ -206,7 +234,9 @@ This service aims to manage tasks performed during a working day.
 <details>
   <summary><b>Delete Task</b></summary>
 
-  <p><b>[MANAGER ONLY] Delete task of a technician</b></p>
+  </br>
+  
+  > **[MANAGER ONLY] Delete task of a technician**
 
   #### URL
   `/tasks/:id`
@@ -243,25 +273,54 @@ This service aims to manage tasks performed during a working day.
 
 </details>
 
-### Run On Postman
+### Run In Postman
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/955776fb0c44d8d9235f)
 
 ## Developer Guideline
 
-### Getting Started
-
-#### Clone Repository
+- Clone Repository
 ```
 $ git clone https://github.com/ViniciusMartinsS/team-task-manager.git
 ```
 
-#### Running on docker
+### Useful Commands
+
+- Run Application On Docker
 ```
 $ make docker
 ```
 
-#### Running on locally
+- Run Application Locally
+
+<sub>⚠️ Before start, on the `config` directory, you must create your `app.json` in order to have the environment variables. 
+On the root of the project, execute the following command:</sup>
+```
+$ cp config/app-dist.json config/app.json
+```
+
+<sub> Having the config setup, now you can execute the following commands: <sub>
+
 ```
 $ make setup
 $ make run
+```
+
+- Run Database Migration
+```
+$ make migrate
+```
+
+- Run Lint Checker
+```
+make lint
+```
+
+- Run Tests
+```bash
+make tests
+```
+
+- Generate Test Coverage File
+```bash
+make coverage
 ```
