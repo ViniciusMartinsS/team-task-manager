@@ -2,7 +2,7 @@ package contract
 
 import "github.com/ViniciusMartinsS/manager/internal/domain/model"
 
-type AuthController interface {
+type AuthUseCases interface {
 	Login([]byte) model.LoginResponse
 }
 

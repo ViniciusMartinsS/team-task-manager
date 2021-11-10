@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ViniciusMartinsS/manager/internal/controller/common"
+	"github.com/ViniciusMartinsS/manager/internal/usecases/common"
 )
 
 const (

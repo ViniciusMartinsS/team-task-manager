@@ -10,7 +10,7 @@ type TaskRepository interface {
 	Delete(id int) error
 }
 
-type TaskController interface {
+type TaskUseCases interface {
 	List(model.HandleTaskRequest) model.TaskResponse
 	Create(model.HandleTaskRequest) model.TaskResponse
 	Update(model.HandleTaskRequest) model.TaskResponse

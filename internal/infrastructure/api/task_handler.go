@@ -16,18 +16,18 @@ import (
 type TASK_HANDLER func(model.HandleTaskRequest) model.TaskResponse
 
 func handleTaskRequest(w http.ResponseWriter, r *http.Request) {
-	var taskController contract.TaskController
+	var taskUseCases contract.TaskUseCases
 
-	if err := container.Resolve(&taskController); err != nil {
-		log.Printf("[ERROR] Setting Up Task Controller: %s", err.Error())
+	if err := container.Resolve(&taskUseCases); err != nil {
+		log.Printf("[ERROR] Setting Up Task Usecases: %s", err.Error())
 		panic(err)
 	}
 
 	requestHandler := map[string]TASK_HANDLER{
-		"GET":    taskController.List,
-		"POST":   taskController.Create,
-		"PUT":    taskController.Update,
-		"DELETE": taskController.Delete,
+		"GET":    taskUseCases.List,
+		"POST":   taskUseCases.Create,
+		"PUT":    taskUseCases.Update,
+		"DELETE": taskUseCases.Delete,
 	}[r.Method]
 
 	body, _ := ioutil.ReadAll(r.Body)

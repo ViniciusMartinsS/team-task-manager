@@ -1,23 +1,23 @@
-package controller
+package usecases
 
 import (
 	"encoding/json"
 
 	"github.com/ViniciusMartinsS/manager/internal/common/errors"
-	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"github.com/ViniciusMartinsS/manager/internal/domain/model"
+	"github.com/ViniciusMartinsS/manager/internal/usecases/common"
 )
 
-type authController struct {
+type authUseCases struct {
 	authService contract.AuthService
 }
 
-func NewAuthController(authService contract.AuthService) contract.AuthController {
-	return authController{authService}
+func NewAuthUseCases(authService contract.AuthService) contract.AuthUseCases {
+	return authUseCases{authService}
 }
 
-func (a authController) Login(body []byte) model.LoginResponse {
+func (a authUseCases) Login(body []byte) model.LoginResponse {
 	var payload model.LoginPayload
 
 	err := common.ValidateLoginSchema(body)

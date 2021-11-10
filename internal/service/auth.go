@@ -3,9 +3,9 @@ package service
 import (
 	constant "github.com/ViniciusMartinsS/manager/internal/common"
 	"github.com/ViniciusMartinsS/manager/internal/common/errors"
-	"github.com/ViniciusMartinsS/manager/internal/controller/common"
 	"github.com/ViniciusMartinsS/manager/internal/domain/contract"
 	"github.com/ViniciusMartinsS/manager/internal/domain/model"
+	"github.com/ViniciusMartinsS/manager/internal/usecases/common"
 	"golang.org/x/crypto/bcrypt"
 )
 
