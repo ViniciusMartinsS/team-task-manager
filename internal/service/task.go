@@ -67,7 +67,7 @@ func (t taskService) Create(userId int, payload model.TaskPayload) model.TaskRes
 	}
 
 	if task.Performed != nil {
-		t.notificationService.Notify(task) // go
+		t.notificationService.Notify(task)
 	}
 
 	row, err := t.taskRepository.Create(task)
@@ -104,7 +104,7 @@ func (t taskService) Update(id int, userId int, payload model.TaskPayload) model
 	}
 
 	if task.Performed != nil {
-		t.notificationService.Notify(row) // go
+		t.notificationService.Notify(row)
 	}
 
 	result := make([]model.TaskResponseContent, 0)
